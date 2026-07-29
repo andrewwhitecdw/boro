@@ -1,6 +1,6 @@
 [package]
 name = "boro"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Linux kernel commit review CLI with multi-stage agentic workflow"
 license = "Apache-2.0"
