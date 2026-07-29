@@ -4,6 +4,11 @@ version = "0.1.0"
 edition = "2021"
 description = "Linux kernel commit review CLI with multi-stage agentic workflow"
 license = "Apache-2.0"
+repository = "https://github.com/NVIDIA/boro"
+homepage = "https://github.com/NVIDIA/boro"
+readme = "README.md"
+keywords = ["linux", "kernel", "cli", "code-review", "ai"]
+categories = ["command-line-utilities", "development-tools"]
 
 [dependencies]
 anyhow = "1"
