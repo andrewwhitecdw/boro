@@ -1249,7 +1249,7 @@ fn fmt_wall_ms(ms: u64) -> String {
 }
 
 fn json_u64(v: &Value) -> Option<u64> {
-    v.as_u64().or_else(|| v.as_i64().map(|i| i as u64))
+    v.as_u64().or_else(|| v.as_i64().filter(|&i| i >= 0).map(|i| i as u64))
 }
 
 #[cfg(test)]
@@ -1358,5 +1358,14 @@ mod tests {
             parsed["summary"]["highlights"][0]["location"]["file"],
             "drivers/foo.c"
         );
+    }
+
+    #[test]
+    fn json_u64_rejects_negative_numbers() {
+        assert_eq!(json_u64(&serde_json::json!(u64::MAX)), Some(u64::MAX));
+        assert_eq!(json_u64(&serde_json::json!(-1)), None);
+        assert_eq!(json_u64(&serde_json::json!(-42)), None);
+        assert_eq!(json_u64(&serde_json::json!(0)), Some(0));
+        assert_eq!(json_u64(&serde_json::json!(42)), Some(42));
     }
 }
